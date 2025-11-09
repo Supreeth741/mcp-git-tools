@@ -51,6 +51,39 @@ npm run dev
 npm start
 ```
 
+### HTTP Server (for testing)
+
+```bash
+# Start HTTP server for testing
+npm run start:http
+
+# Test endpoints
+curl http://localhost:4000              # Server info and health
+curl http://localhost:4000/health       # Health check
+curl http://localhost:4000/status       # Server status
+curl http://localhost:4000/tools        # Available tools
+```
+
+### Development with HTTP
+
+```bash
+npm run dev:http
+```
+
+## Testing
+
+### Test Git Operations
+
+```bash
+npm run test:git
+```
+
+### Test HTTP Endpoints
+
+```bash
+npm run test:endpoints
+```
+
 ### MCP Configuration
 
 Add this server to your MCP client configuration:
@@ -73,23 +106,31 @@ Add this server to your MCP client configuration:
 Create a `.env` file in the project root:
 
 ```env
-# Add any environment variables here
-# Currently none are required for basic functionality
+# HTTP server port (default: 4000)
+HTTP_PORT=4000
+
+# Optional: Git service tokens
+GITHUB_TOKEN=your_github_token
+GITLAB_TOKEN=your_gitlab_token
+OPENAI_API_KEY=your_llm_key   # optional, for LLM testing
 ```
 
 ## Development Status
 
-🚧 **Under Development** 🚧
+� **Ready for Use!** �
 
 - [x] Basic MCP server setup
 - [x] Tool schema definitions
-- [ ] Git status implementation
-- [ ] Git log implementation
-- [ ] Git diff implementation
-- [ ] Git branch operations
-- [ ] Git commit functionality
-- [ ] Repository information resource
-- [ ] Commit message prompt generation
+- [x] Git status implementation
+- [x] Git log implementation
+- [x] Git diff implementation
+- [x] Git branch operations (list/create/switch/delete)
+- [x] Git commit functionality
+- [x] Repository information resource
+- [x] HTTP server for testing
+- [x] Comprehensive error handling
+- [ ] Commit message prompt generation (AI-powered)
+- [ ] Advanced Git operations (merge, rebase, etc.)
 
 ## Architecture
 

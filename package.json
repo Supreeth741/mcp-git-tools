@@ -7,8 +7,12 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
+    "start:http": "node dist/server.js --http",
     "dev": "ts-node-esm src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:http": "ts-node-esm src/server.ts --http",
+    "test": "node test-http.js",
+    "test:endpoints": "node test-http.js",
+    "test:git": "node test-git.js"
   },
   "keywords": [
     "mcp",
@@ -25,6 +29,7 @@
     "simple-git": "^3.30.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.5",
     "@types/node": "^24.10.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
