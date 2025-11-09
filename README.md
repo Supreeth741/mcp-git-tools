@@ -15,6 +15,14 @@ This server provides the following tools:
 - **git-commit**: Create Git commits with staged changes
 - **health-check**: Check server health status
 
+### Webhooks
+
+- **GitHub Webhook**: `/webhook/github` - Handle GitHub events
+  - **Pull Request Events**: Automatically processes opened PRs
+  - **Push Events**: Tracks repository pushes
+  - **Health Check**: `/webhook/github/health` - Webhook service status
+  - **Test Endpoint**: `/webhook/github/test` - Webhook validation
+
 ### Resources
 
 - **git://repository-info**: Get current Git repository information
@@ -82,6 +90,22 @@ npm run test:git
 
 ```bash
 npm run test:endpoints
+```
+
+### Test Webhook Functionality
+
+```bash
+npm run test:webhook
+```
+
+### Manual Webhook Testing
+
+```bash
+# Test with curl
+curl -X POST http://localhost:4000/webhook/github \
+  -H "Content-Type: application/json" \
+  -H "x-github-event: pull_request" \
+  --data @test-webhook-payload.json
 ```
 
 ### MCP Configuration

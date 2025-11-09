@@ -12,7 +12,8 @@
     "dev:http": "ts-node-esm src/server.ts --http",
     "test": "node test-http.js",
     "test:endpoints": "node test-http.js",
-    "test:git": "node test-git.js"
+    "test:git": "node test-git.js",
+    "test:webhook": "node test-webhook.js"
   },
   "keywords": [
     "mcp",

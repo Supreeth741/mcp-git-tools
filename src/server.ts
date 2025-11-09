@@ -13,6 +13,7 @@ import {
 import express from "express";
 import * as dotenv from "dotenv";
 import * as gitService from "./services/gitService.js";
+import githubWebhook from "./webhooks/github.js";
 
 // Load environment variables
 dotenv.config();
@@ -729,6 +730,13 @@ function createHttpServer() {
   const app = express();
   const PORT = process.env.HTTP_PORT || 4000;
 
+  // Middleware for parsing JSON payloads (required for webhooks)
+  app.use(express.json({ limit: "10mb" }));
+  app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+  // Register webhook routes
+  app.use("/webhook", githubWebhook);
+
   // Health check endpoint
   app.get("/", async (req, res) => {
     try {
@@ -742,6 +750,11 @@ function createHttpServer() {
           health: "/health",
           status: "/status",
           tools: "/tools",
+          webhooks: {
+            github: "/webhook/github",
+            githubHealth: "/webhook/github/health",
+            githubTest: "/webhook/github/test",
+          },
         },
       });
     } catch (error) {
