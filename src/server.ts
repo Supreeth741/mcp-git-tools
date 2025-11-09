@@ -11,9 +11,11 @@ import {
   GetPromptRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import express from "express";
-import * as dotenv from "dotenv";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
 import * as gitService from "./services/gitService.js";
 import githubWebhook from "./webhooks/github.js";
+import gitlabWebhook from "./webhooks/gitlab.js";
 
 // Load environment variables
 dotenv.config();
@@ -728,14 +730,18 @@ server.setRequestHandler(GetPromptRequestSchema, async (request) => {
  */
 function createHttpServer() {
   const app = express();
-  const PORT = process.env.HTTP_PORT || 4000;
+  const PORT = process.env.PORT || process.env.HTTP_PORT || 4000;
 
   // Middleware for parsing JSON payloads (required for webhooks)
-  app.use(express.json({ limit: "10mb" }));
+  app.use(bodyParser.json());
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+  // Root endpoint
+  app.get("/", (_, res) => res.send("MCP Git Tools Server running 🚀"));
 
   // Register webhook routes
   app.use("/webhook", githubWebhook);
+  app.use("/webhook", gitlabWebhook);
 
   // Health check endpoint
   app.get("/", async (req, res) => {
@@ -824,6 +830,7 @@ async function main() {
     const httpServer = app.listen(PORT, () => {
       console.error(`HTTP server running on http://localhost:${PORT}`);
       console.error(`Try: curl http://localhost:${PORT}`);
+      console.log(`Server listening on port ${PORT}`);
     });
 
     // Graceful shutdown for HTTP server
