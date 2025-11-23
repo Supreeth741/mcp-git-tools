@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "git-doc": {
+      "command": "node",
+      "args": ["d:\\flyzo\\mcp-git-tools\\dist\\index.js"],
+      "cwd": "d:\\flyzo\\your-git-project"
+    }
+  }
+}

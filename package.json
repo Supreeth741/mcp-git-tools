@@ -1,0 +1,36 @@
+{
+  "name": "mcp-git-tools",
+  "version": "1.0.0",
+  "description": "Git Doc MCP Server - Automate documentation tasks for Git workflow",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "mcp-git-tools": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "git",
+    "documentation",
+    "automation",
+    "model-context-protocol"
+  ],
+  "author": "Supreeth741",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
